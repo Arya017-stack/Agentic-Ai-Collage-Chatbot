@@ -1,3 +1,5 @@
+import dns from 'node:dns';
+dns.setServers(['8.8.8.8', '1.1.1.1']);
 import app from "./app.ts";
 import connectDB from "./config/database.config.ts";
 
@@ -8,13 +10,13 @@ const start = async (): Promise<void> => {
         await connectDB();
 
         app.listen(PORT, () => {
-            console.log("AI-Agentic-Chatbot Server is runing");
+            console.log("AI-Agentic-Chatbot Server is running");
             console.log(" URL: http://localhost:" + PORT);
             console.log(" Node: " + process.version);
             console.log(" Press Ctrl+C to stop");
         });
     } catch(error) {
-        console.error ("Fasailedf tyo start server:", error);
+        console.error ("Failed to start server:", error);
         process.exit(1);
     }
 };
