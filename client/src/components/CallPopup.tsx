@@ -1,5 +1,3 @@
-// PLACEHOLDER — Full implementation in Part 2
-
 interface CallPopupProps {
   open: boolean;
   onClose: () => void;
