@@ -1,23 +1,27 @@
-import dns from 'node:dns';
-dns.setServers(['8.8.8.8', '1.1.1.1']);
+
 import app from "./app.ts";
 import connectDB from "./config/database.config.ts";
+import { initializeKnowledgeBase } from "./services/rag.service.ts";
 
 const PORT = process.env.PORT || 5000;
 
 const start = async (): Promise<void> => {
-    try{
+    try {
         await connectDB();
+
+        // Initialize knowledge base before starting Express
+        await initializeKnowledgeBase();
 
         app.listen(PORT, () => {
             console.log("AI-Agentic-Chatbot Server is running");
-            console.log(" URL: http://localhost:" + PORT);
-            console.log(" Node: " + process.version);
-            console.log(" Press Ctrl+C to stop");
+            console.log("URL: http://localhost:" + PORT);
+            console.log("Node: " + process.version);
+            console.log("Press Ctrl+C to stop");
         });
     } catch(error) {
-        console.error ("Failed to start server:", error);
+        console.error("Failed to start server:", error);
         process.exit(1);
     }
 };
+
 start();
