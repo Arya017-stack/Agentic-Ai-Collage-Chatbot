@@ -1,9 +1,19 @@
+import type { ReactNode } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import { AuthProvider } from "./context/AuthContext";
+import Navbar from "./components/Navbar";
+import FloatingChatButton from "./components/FloatingChatButton";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
+
+const WithNavbar = ({ children }: { children: ReactNode }) => (
+  <>
+    <Navbar />
+    {children}
+  </>
+);
 
 export default function App() {
   return (
@@ -11,10 +21,18 @@ export default function App() {
       <AuthProvider>
         <Toaster position="top-center" />
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route
+            path="/"
+            element={
+              <WithNavbar>
+                <HomePage />
+              </WithNavbar>
+            }
+          />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
         </Routes>
+        <FloatingChatButton />
       </AuthProvider>
     </BrowserRouter>
   );
