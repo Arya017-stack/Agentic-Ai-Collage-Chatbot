@@ -1,3 +1,5 @@
 node_modules/
 .env
 dist/
+agentic ai chatbot gemini key*.txt
+omniroute_setup_key.txt
